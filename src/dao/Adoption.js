@@ -2,23 +2,23 @@ import adoptionModel from "./models/Adoption.js";
 
 export default class Adoption {
 
-    get = (params) =>{
+    get = (params) => {
         return adoptionModel.find(params);
     }
 
-    getBy = (params) =>{
+    getBy = (params) => {
         return adoptionModel.findOne(params);
     }
 
-    save = (doc) =>{
+    save = (doc) => {
         return adoptionModel.create(doc);
     }
 
-    update = (id,doc) =>{
-        return adoptionModel.findByIdAndUpdate(id,{$set:doc})
+    update = (id, doc) => {
+        return adoptionModel.findByIdAndUpdate(id, { $set: doc })
     }
-    
-    delete = (id) =>{
+
+    delete = (id) => {
         return adoptionModel.findByIdAndDelete(id);
     }
 }
