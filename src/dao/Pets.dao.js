@@ -1,4 +1,4 @@
-import petModel from "./models/Pet.js";
+import petModel from "./models/Pet.js"
 
 export default class Pet {
 
@@ -7,11 +7,11 @@ export default class Pet {
     }
 
     getBy = (params) => {
-        return petModel.findOne(params);
+        return petModel.findOne(params)
     }
 
     save = (doc) => {
-        return petModel.create(doc);
+        return petModel.create(doc)
     }
 
     update = (id, doc) => {
@@ -19,6 +19,6 @@ export default class Pet {
     }
 
     delete = (id) => {
-        return petModel.findByIdAndDelete(id);
+        return petModel.findByIdAndDelete(id)
     }
 }

@@ -28,7 +28,7 @@ export const generateUser = (quantity) => {
 
   for (let i = 0; i < quantity; i++) {
     const passwordHash = bcrypt.hashSync('coder123', saltRounds)
-     const role = Math.random() < 0.5 ? 'user' : 'admin'
+    const role = Math.random() < 0.5 ? 'user' : 'admin'
     users.push({
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),

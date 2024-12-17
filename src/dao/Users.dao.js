@@ -1,18 +1,17 @@
-import userModel from "./models/User.js";
-
+import userModel from "./models/User.js"
 
 export default class Users {
 
     get = (params) => {
-        return userModel.find(params);
+        return userModel.find(params)
     }
 
     getBy = (params) => {
-        return userModel.findOne(params);
+        return userModel.findOne(params)
     }
 
     save = (doc) => {
-        return userModel.create(doc);
+        return userModel.create(doc)
     }
 
     update = (id, doc) => {
@@ -20,6 +19,6 @@ export default class Users {
     }
 
     delete = (id) => {
-        return userModel.findByIdAndDelete(id);
+        return userModel.findByIdAndDelete(id)
     }
 }

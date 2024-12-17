@@ -17,7 +17,7 @@ router.get('/mockingusers', (req, res) => {
 })
 
 router.post('/generatedata', async (req, res) => {
-    const { users, pets } = req.body;
+    const { users, pets } = req.body
 
     try {
         // Generar usuarios
