@@ -28,6 +28,12 @@ paths:
       responses: 
         "201":
           description: El usuario fue creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: Solicitud incorrecta (datos incompletos)
   /api/users/{uid}:
     get:
       summary: Obtiene un usuario a partir de su id
@@ -46,6 +52,36 @@ paths:
             application/json: 
               schema: 
                 $ref: '#components/schemas/User'
+        "404":
+          description: Usuario no encontrado
+    put:
+      summary: Actualiza un usuario existente
+      tags:
+        - Users
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: ID del usuario a actualizar
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema: 
+              $ref: '#components/requestBodies/updateUser'
+      responses:
+        "200":
+          description: Usuario actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/User'
+        "404":
+          description: Usuario no encontrado
+        "400":
+          description: Solicitud inválida
 
 components:
   schemas:
@@ -54,7 +90,7 @@ components:
       properties: 
         _id: 
           type: ObjectId
-          description: Id autogerado por mong
+          description: Id autogerado por mongo
         first_name:
           type: String
           description: Nombre del usuario
@@ -83,6 +119,26 @@ components:
         pets: []
   requestBodies:
     createUser:
+      type: object
+      properties: 
+        first_name:
+          type: String
+          description: Nombre del usuario
+        last_name:
+          type: String
+          description: Apellido del usuario
+        email:
+          type: String
+          description: Email del usuario
+        password:
+          type: String
+          description: Password del usuario
+      example: 
+        first_name: Example
+        last_name: Example
+        email: example@example.com
+        password: '123456'
+    updateUser:
       type: object
       properties: 
         first_name:

@@ -1,0 +1,193 @@
+paths:
+  /api/pets:
+    get:
+      summary: Obtiene todos las mascotas
+      tags:
+        - Pets
+      responses:
+        "200":
+          description: Lista de mascotas obtenidas exitosamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pets'
+        "500":
+          description: Error interno del servidor, usualmente generado por una mala query o un problema con la base de datos
+    post:
+      summary: Crea una nueva mascota
+      tags:
+        - Pets
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema: 
+              $ref: '#components/requestBodies/createPet'
+      responses:
+        "201":
+          description: Mascota creada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pets'
+        "400":
+          description: Solicitud incorrecta (datos incompletos)
+  /api/pets/{pid}:
+    put:
+      summary: Actualiza una mascota existente
+      tags:
+        - Pets
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: ID de la mascota a actualizar
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/updatePet'
+      responses:
+        "200":
+          description: Mascota actualizada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Pets'
+        "404":
+          description: Mascota no encontrada
+    delete:
+      summary: Elimina una mascota existente
+      tags:
+        - Pets
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: ID de la mascota a eliminar
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Mascota eliminada exitosamente
+        "404":
+          description: Mascota no encontrada
+  /api/pets/with-image:
+    post:
+      summary: Crea una nueva mascota con imagen
+      tags:
+        - Pets
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Nombre de la mascota
+                specie:
+                  type: string
+                  description: Especie de la mascota
+                birthDate:
+                  type: string
+                  format: date
+                  description: Fecha de nacimiento de la mascota
+                image:
+                  type: string
+                  format: binary
+                  description: Archivo de imagen de la mascota
+      responses:
+        "201":
+          description: Mascota creada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pets'
+        "400":
+          description: Solicitud incorrecta (datos incompletos o formato de archivo inválido)
+
+components:
+  schemas:
+    Pets:
+      type: object
+      properties: 
+        _id: 
+          type: ObjectId
+          description: Id autogerado por mongo
+        name:
+          type: String
+          description: Nombre de la mascota
+        specie:
+          type: String
+          description: Especie de la mascota
+        birthDate:
+          type: String
+          format: Date
+          description: Fecha de nacimiento de a mascota
+        adopted:
+          type: Boolean
+          description: Estado de adopcion
+        owner:
+          type: String
+          description: Usuario que adopto la mascota
+        image:
+          type: String
+          description: Imagen de la mascota (si la hay)
+      example: 
+        _id: ObjectId(añskudgfñoalsdugfvlialfgAKHVCBDALKSYDGF)
+        name: Example
+        specie: Example
+        birthDate: 1-1-2020
+        adopted: false
+        owner: []
+        image: Example
+  requestBodies:
+    createPet:
+      type: object
+      properties: 
+        name:
+          type: String
+          description: Nombre de la mascota
+        specie:
+          type: String
+          description: Especie de la mascota
+        birthDate:
+          type: String
+          format: Date
+          description: Fecha de nacimiento de la mascota
+        adopted:
+          type: Boolean
+          description: Estado de adopcion
+      example: 
+        name: Example
+        specie: Example
+        birthDate: 1-1-2020
+        adopted: false
+    updatePet:
+      type: object
+      properties: 
+        name:
+          type: String
+          description: Nombre de la mascota
+        specie:
+          type: String
+          description: Especie de la mascota
+        birthDate:
+          type: String
+          format: Date
+          description: Fecha de nacimiento de la mascota
+        adopted:
+          type: Boolean
+          description: Estado de adopcion
+      example: 
+        name: Example
+        specie: Example
+        birthDate: 1-1-2020
+        adopted: false
