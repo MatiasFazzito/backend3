@@ -12,7 +12,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Pets'
+                  $ref: '#components/schemas/Pets'
         "500":
           description: Error interno del servidor, usualmente generado por una mala query o un problema con la base de datos
     post:
@@ -26,12 +26,12 @@ paths:
             schema: 
               $ref: '#components/requestBodies/createPet'
       responses:
-        "201":
+        "200":
           description: Mascota creada exitosamente
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Pets'
+                $ref: '#components/schemas/Pets'
         "400":
           description: Solicitud incorrecta (datos incompletos)
   /api/pets/{pid}:
@@ -51,7 +51,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/requestBodies/updatePet'
+              $ref: '#components/requestBodies/updatePet'
       responses:
         "200":
           description: Mascota actualizada exitosamente
@@ -104,12 +104,12 @@ paths:
                   format: binary
                   description: Archivo de imagen de la mascota
       responses:
-        "201":
+        "200":
           description: Mascota creada exitosamente
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Pets'
+                $ref: '#components/schemas/Pets'
         "400":
           description: Solicitud incorrecta (datos incompletos o formato de archivo inválido)
 

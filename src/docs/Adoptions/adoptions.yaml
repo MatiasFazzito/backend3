@@ -1,0 +1,78 @@
+paths:
+  /api/adoptions:
+    get:
+      summary: Obtiene todos las adopciones
+      tags:
+        - Adoptions
+      responses:
+        "200":
+          description: Lista de adopciones obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Adoption'
+        "500":
+          description: Error interno del servidor, usualmente generado por una mala query o un problema con la base de datos
+  /api/adoptions/{aid}:
+    get:
+      summary: Obtiene una adopcion existente
+      tags:
+        - Adoptions
+      parameters:
+        - name: aid
+          in: path
+          required: true
+          description: ID de la adopcion solicitada
+          schema: 
+            $type: String
+      responses:
+        "200":
+          description: Adopcion obtenida con exito
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Adoption'
+        "404":
+          description: Adopcion no encontrada
+  /api/adoptions/{uid}/{pid}:
+    post:
+      summary: Crea una nueva adopcion
+      tags:
+        - Adoptions
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: ID de usuario que realiza la adopcion
+        - name: pid
+          in: path
+          required: true
+          description: ID de la mascota que fue adoptada
+      responses:
+        "404":
+          description: Usuario o mascota no encontrado
+        "400":
+          description: Solicitud incorrecta (Mascota ya adoptada)
+        "200":
+          description: Adopcion creada exitosamente     
+
+components:
+  schemas:
+    Adoption:
+      type: object
+      properties:
+        _id: 
+          type: ObjectId
+          description: Id autogerado por mongo
+        owner:
+          type: String
+          description: ID de usuario que adopto la mascota
+        pets:
+          type: Array
+          description: ID de mascota adoptadas
+      example: 
+        _id: ObjectId(añskudgfñoalsdugfvlialfgAKHVCBDALKSYDGF)
+        owner: ÑLIUFGWLiefgvIlefgvbesfWEFG
+        pets: añlieusfgbñaWEUGFBÑoweugfbñoJEB
