@@ -1,2 +1,1 @@
-hacer la documentacion de adoptions
-completar los test
+Hacer tests de users y adoptions
