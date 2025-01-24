@@ -40,7 +40,7 @@ describe("testing de adoptme", ()=>{
 
         it("El endpoint GET /api/sessions/current debe recibir una cookie y devolver el usuario que corresponde", async () => {
             const {_body} = await requester.get("/api/sessions/current").set("Cookie", [`${cookie.name}=${cookie.value}`])
-            expect(_body.payload.email).to.be.equal("supertest@gmail.com")
+            expect(_body.payload.email).to.be.equal("supertest@gmail.com")/*Cambiar email dependiendo el usado anteriormente al crear el mock de usuario*/ 
         })
     })
 })

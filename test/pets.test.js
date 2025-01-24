@@ -8,6 +8,7 @@ const requester = supertest("http://localhost:8080")
 describe("testing de adoptme", () => {
     describe("Test de mascotas", async () => {
         let pets = []
+
         it("El endpoint POST /api/pets debe crear una mascota correctamente", async () => {
             const petMock = {
                 name: "pepe",
@@ -17,6 +18,7 @@ describe("testing de adoptme", () => {
             const { _body, ok, statusCode, status } = await requester.post("/api/pets").send(petMock)
             expect(_body.payload).to.have.property("_id")
         })
+
         it("El endpoint POST /api/pets debe devolver un status 400 a intentar crear una mascota sin un campo obigatorio", async () => {
             const petMock = {
                 specie: "cat",
@@ -25,10 +27,12 @@ describe("testing de adoptme", () => {
             const { statusCode } = await requester.post("/api/pets").send(petMock)
             expect(statusCode).to.equal(400)
         })
+
         it("El endpoint GET /api/pets debe devolver el listado de mascotas", async () => {
             const response = await requester.get("/api/pets")
             expect(response.status).to.equal(200)
         })
+        
         it("El endpoint POST /api/pets/withimage debe crear una mascota con imagen", async () => {
             const petMock = {
                 name: "pepe",

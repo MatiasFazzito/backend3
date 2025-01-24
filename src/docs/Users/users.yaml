@@ -82,6 +82,22 @@ paths:
           description: Usuario no encontrado
         "400":
           description: Solicitud inválida
+    delete:
+      summary: Elimina un usuario existente
+      tags:
+        - Users
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: ID del usuario a eliminar
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Usuario eliminado exitosamente
+        "404":
+          description: Usuario no encontrado
 
 components:
   schemas:
