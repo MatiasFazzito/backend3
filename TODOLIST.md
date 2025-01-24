@@ -1,1 +1,1 @@
-Hacer tests de users y adoptions
+Hacer tests de adoptions
