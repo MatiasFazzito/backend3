@@ -23,11 +23,12 @@ describe("testing de adoptme", () => {
 
             const response = await requester.post("/api/sessions/register").send(userMock)
             expect(response._body.payload).to.have.property("_id")
+            const userId = response._body.payload._id
 
-            const { _body, ok, statusCode } = await requester.get(`/api/users/${response._body.payload._id}`)
+            const { _body, ok, statusCode } = await requester.get(`/api/users/${userId}`)
             expect(ok).to.be.equal(true)
             expect(statusCode).to.be.equal(200)
-            expect(_body.payload._id).to.be.equal(response._body.payload._id)
+            expect(_body.payload._id).to.be.equal(userId)
         })
 
         it("El endpoint PUT /api/users/:uid debe modificar el usuario solicitado", async () => {
@@ -40,13 +41,14 @@ describe("testing de adoptme", () => {
 
             const response = await requester.post("/api/sessions/register").send(userMock)
             expect(response._body.payload).to.have.property("_id")
+            const userId = response._body.payload._id
 
             const modifiedUser = {
                 ...userMock,
                 first_name: 'Juan'
             }
 
-            const updateResponse = await requester.put(`/api/users/${response._body.payload._id}`).send(modifiedUser)
+            const updateResponse = await requester.put(`/api/users/${userId}`).send(modifiedUser)
             expect(updateResponse.status).to.equal(200)
             expect(updateResponse._body.message).to.be.equal('User updated')
         })
@@ -61,8 +63,9 @@ describe("testing de adoptme", () => {
 
             const response = await requester.post("/api/sessions/register").send(userMock)
             expect(response._body.payload).to.have.property("_id")
+            const userId = response._body.payload._id
 
-            const deleteResponse = await requester.delete(`/api/users/${response._body.payload._id}`)
+            const deleteResponse = await requester.delete(`/api/users/${userId}`)
             expect(deleteResponse.status).to.equal(200)
             expect(deleteResponse._body.message).to.be.equal("User deleted")
         })

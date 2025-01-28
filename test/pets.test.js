@@ -7,7 +7,6 @@ const requester = supertest("http://localhost:8080")
 
 describe("testing de adoptme", () => {
     describe("Test de mascotas", async () => {
-        let pets = []
 
         it("El endpoint POST /api/pets debe crear una mascota correctamente", async () => {
             const petMock = {
