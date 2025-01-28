@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node --watch src/app.js",
-    "test": "mocha test/adoptions.test.js"
+    "test": "mocha test/users.test.js"
   },
   "keywords": [],
   "author": "",

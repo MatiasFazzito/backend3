@@ -13,7 +13,7 @@ describe("testing de adoptme", ()=>{
             const userMock= {
                 first_name: "pepe",
                 last_name: "rodriguez",
-                email: "supertest@gmail.com", /*Cambiar el email cada vez que se haga un test para evitar conflicto con la base de datos*/
+                email: "register@sessiontest.com", /*Cambiar el email cada vez que se haga un test para evitar conflicto con la base de datos*/
                 password: "123456"
             }
             const {_body} = await requester.post("/api/sessions/register").send(userMock)
@@ -22,7 +22,7 @@ describe("testing de adoptme", ()=>{
 
         it("El endpoint POST /api/session/login debe devolver una cookie al loguear un usuario registrado", async () => {
             const userMock= {
-                email: "supertest@gmail.com",
+                email: "register@sessiontest.com",
                 password: "123456"
             }
             const result = await requester.post("/api/sessions/login").send(userMock)
@@ -40,7 +40,7 @@ describe("testing de adoptme", ()=>{
 
         it("El endpoint GET /api/sessions/current debe recibir una cookie y devolver el usuario que corresponde", async () => {
             const {_body} = await requester.get("/api/sessions/current").set("Cookie", [`${cookie.name}=${cookie.value}`])
-            expect(_body.payload.email).to.be.equal("supertest@gmail.com")/*Cambiar email dependiendo el usado anteriormente al crear el mock de usuario*/ 
+            expect(_body.payload.email).to.be.equal("register@sessiontest.com") /*Cambiar email dependiendo el usado anteriormente al crear el mock de usuario*/ 
         })
     })
 })

@@ -21,7 +21,7 @@ describe("testing de adoptme", () => {
             const userMock = {
                 first_name: "pepe",
                 last_name: "rodriguez",
-                email: "supertest@hotmail.com", /*Cambiar el email cada vez que se haga un test para evitar conflicto con la base de datos*/
+                email: "post@adoptiontest.com", /*Cambiar el email cada vez que se haga un test para evitar conflicto con la base de datos*/
                 password: "123456"
             }
 
@@ -58,7 +58,7 @@ describe("testing de adoptme", () => {
             const userMock = {
                 first_name: "pepe",
                 last_name: "rodriguez",
-                email: "supertest@supertest.com", /*Cambiar el email cada vez que se haga un test para evitar conflicto con la base de datos*/
+                email: "get@adoptiontest.com", /*Cambiar el email cada vez que se haga un test para evitar conflicto con la base de datos*/
                 password: "123456"
             }
 
