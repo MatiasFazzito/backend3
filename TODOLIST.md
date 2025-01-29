@@ -1,1 +1,0 @@
-Hacer tests de adoptions
