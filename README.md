@@ -74,7 +74,7 @@ _This command will run all test on the file indicated on packaje.json archive an
 
 ### Docker image 🛠️
 
-_To run a docker image go to this link_
+_To run a docker image go to this link and follow instructions to run it_
 
 *[matiasfazzito/adoptme:latest](https://hub.docker.com/r/matiasfazzito/adoptme)
 
