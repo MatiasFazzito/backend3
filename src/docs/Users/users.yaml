@@ -1,4 +1,4 @@
-paths: 
+paths:
   /api/users:
     get:
       summary: Obtiene todos los usuarios
@@ -7,51 +7,32 @@ paths:
       responses:
         "200":
           description: Los usuarios fueron obtenidos satisfactoriamente de la base de datos
-          content: 
-            application/json: 
-              schema: 
-                type: array
-                items: 
-                  $ref: '#components/schemas/User'
-        "500":
-          description: Error interno del servidor, usualmente generado por una mala query o un problema con la base de datos
-    post:
-      summary: Crea un nuevo usuario a partir de un body
-      tags:
-        - Users
-      requestBody:
-        required: true
-        content: 
-          application/json:
-            schema: 
-              $ref: '#components/requestBodies/createUser'
-      responses: 
-        "200":
-          description: El usuario fue creado exitosamente
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-        "400":
-          description: Solicitud incorrecta (datos incompletos)
+                type: array
+                items:
+                  $ref: "#components/schemas/User"
+        "500":
+          description: Error interno del servidor, usualmente generado por una mala query o un problema con la base de datos
   /api/users/{uid}:
     get:
       summary: Obtiene un usuario a partir de su id
-      tags: 
+      tags:
         - Users
       parameters:
         - name: uid
           in: path
           required: true
           description: id del usuario que vamos a solicitar
-          schema: 
+          schema:
             $type: String
-      responses: 
+      responses:
         "200":
-          content: 
-            application/json: 
-              schema: 
-                $ref: '#components/schemas/User'
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/User"
         "404":
           description: Usuario no encontrado
     put:
@@ -67,17 +48,17 @@ paths:
             type: string
       requestBody:
         required: true
-        content: 
+        content:
           application/json:
-            schema: 
-              $ref: '#components/requestBodies/updateUser'
+            schema:
+              $ref: "#components/requestBodies/updateUser"
       responses:
         "200":
           description: Usuario actualizado exitosamente
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/User'
+                $ref: "#components/schemas/User"
         "404":
           description: Usuario no encontrado
         "400":
@@ -98,13 +79,33 @@ paths:
           description: Usuario eliminado exitosamente
         "404":
           description: Usuario no encontrado
+  /api/sessions/register:
+    post:
+      summary: Crea un nuevo usuario a partir de un body
+      tags:
+        - Session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/createUser"
+      responses:
+        "200":
+          description: El usuario fue creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Solicitud incorrecta (datos incompletos)
 
 components:
   schemas:
     User:
       type: object
-      properties: 
-        _id: 
+      properties:
+        _id:
           type: ObjectId
           description: Id autogerado por mongo
         first_name:
@@ -125,7 +126,7 @@ components:
         pets:
           type: Array
           description: Listado de mascotas adoptadas
-      example: 
+      example:
         _id: ObjectId(añskudgfñoalsdugfvlialfgAKHVCBDALKSYDGF)
         first_name: Example
         last_name: Example
@@ -136,7 +137,7 @@ components:
   requestBodies:
     createUser:
       type: object
-      properties: 
+      properties:
         first_name:
           type: String
           description: Nombre del usuario
@@ -149,14 +150,14 @@ components:
         password:
           type: String
           description: Password del usuario
-      example: 
+      example:
         first_name: Example
         last_name: Example
         email: example@example.com
-        password: '123456'
+        password: "123456"
     updateUser:
       type: object
-      properties: 
+      properties:
         first_name:
           type: String
           description: Nombre del usuario
@@ -169,8 +170,8 @@ components:
         password:
           type: String
           description: Password del usuario
-      example: 
+      example:
         first_name: Example
         last_name: Example
         email: example@example.com
-        password: '123456'
+        password: "123456"
